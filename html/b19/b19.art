@@ -1,0 +1,191 @@
+{{extend defaultLayout}}
+
+{{block 'css'}}
+<link rel="stylesheet" href="{{_res_path}}html/b19/b19.css">
+{{/block}}
+
+{{block 'main'}}
+
+<div class="title">
+    <div class="l">
+        <img src="{{_res_path}}html/otherimg/Phigros_Icon_3.0.0.png" alt="icon">
+        <div class="doc">
+            <p>Phigros</p>
+            <p>RankingScore查询</p>
+        </div>
+    </div>
+    <div class="r">
+        <p>Player: {{#gameuser.PlayerId}}</p>
+        <p>RankingScore: {{gameuser.rks.toFixed(4)}}</p>
+        <div class="Challenge">
+            <p>ChallengeMode:</p>
+            {{if gameuser.dan}}
+            <div class="CLG {{gameuser.dan.EX ? 'colorful' : ''}}">
+                <p>{{gameuser.dan.Dan}}</p>
+            </div>
+            {{/if}}
+            <div class="Challenge-r">
+                <img src="{{_res_path}}html/otherimg/{{gameuser.ChallengeMode}}.png" alt="Challenge">
+                <p>{{gameuser.ChallengeModeRank}}</p>
+            </div>
+        </div>
+        {{if gameuser.data}}
+        <p>Data: {{gameuser.data}}</p>
+        {{/if}}
+        <p>Date: {{Date}}</p>
+    </div>
+</div>
+<div class="b19">
+
+    {{each phi song}}
+
+    {{if song}}
+
+    <div class="song phi_song">
+        <div class="ill-box">
+            <div class="num">
+                <p name="pvis">P{{$index+1}}</p>
+            </div>
+            <div class="ill">
+                <img src="{{song.illustration}}" alt="ill">
+            </div>
+            <div class="rank-{{song.rank}}">
+                <div class="org">
+                    <p>{{song.rank}}&ensp;{{song.difficulty}}</p>
+                </div>
+                <div class="rel">
+                    <p>{{song.rks.toFixed(2)}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="info-{{song.rank}}">
+            <div class="songname">
+                <p name="pvis">{{song.song}}</p>
+            </div>
+            <div class="songinfo">
+                <div class="Rating">
+                    <img src="{{_res_path}}html/otherimg/{{song.Rating}}.png" alt="{{song.Rating}}">
+                </div>
+                <div class="chengji">
+                    <div class="score">
+                        <p>{{song.score}}</p>
+                    </div>
+                    <div class="line"></div>
+                    <div class="acc-box">
+                        <div class="acc">
+                            <p>{{song.acc.toFixed(2)}}%</p>
+                        </div>
+                        <div class="suggest">
+                            <p>>> {{song.suggest}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{else}}
+
+    <div class="Nosignal">
+        <div class="border_corner border_corner_left_top"></div>
+        <div class="border_corner border_corner_right_top"></div>
+        <div class="border_corner border_corner_left_bottom"></div>
+        <div class="border_corner border_corner_right_bottom"></div>
+        <div class="line"></div>
+        <div class="timeout">
+            <p>TIME_OUT</p>
+        </div>
+        <div class="client">
+            <p>>>> PhigrOS Client Finding Phi.score</p>
+        </div>
+        <div class="sqrt"></div>
+    </div>
+
+    {{/if}}
+
+    {{/each}}
+
+    {{each b19_list song}}
+
+    <div class="song {{$index<27?'b_song':''}}">
+        <div class="ill-box">
+            <div class="num">
+                <p name="pvis">#{{song.num}}</p>
+            </div>
+            <div class="ill">
+                <img src="{{song.illustration}}" alt="ill">
+            </div>
+            <div class="rank-{{song.rank}}">
+                <div class="org">
+                    <p>{{song.rank}}&ensp;{{song.difficulty}}</p>
+                </div>
+                <div class="rel">
+                    <p>{{song.rks.toFixed(2)}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="info-{{song.rank}}">
+            <div class="songname">
+                <p name="pvis">{{song.song}}</p>
+            </div>
+            <div class="songinfo">
+                <div class="Rating">
+                    <img src="{{_res_path}}html/otherimg/{{song.Rating}}.png" alt="{{song.Rating}}">
+                </div>
+                <div class="chengji">
+                    <div class="score">
+                        <p>{{song.score}}</p>
+                    </div>
+                    <div class="line"></div>
+                    <div class="acc-box">
+                        <div class="acc">
+                            <p>{{song.acc.toFixed(2)}}%</p>
+                        </div>
+                        <div class="suggest">
+                            <p>>> {{song.suggest}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{/each}}
+
+</div>
+<div class="createdbox">
+    <div class="phi-plugin">
+        <p>{{_plugin}}</p>
+    </div>
+    <div class="ver">
+        <p>{{Version.ver}}</p>
+    </div>
+</div>
+
+{{if theme == "snow"}}
+<div class="snow-box"> </div>
+<script>
+    function addSnow() {
+        var snow = document.createElement("div")
+        snow.innerHTML = `<img src="{{_res_path}}html/otherimg/snow${Math.floor(Math.random() * 4) + 1}.png">`
+        snow.className = "snow"
+        snow.style.left = `${Math.random() * 100}%`
+        snow.style.bottom = `${Math.random() * 100}%`
+        snow.style.width = `${Math.random() * 4}%`
+        snow.style.rotate = `${Math.random() * 360}deg`
+        snow.style.transform = `rotate3d(${Math.random()}, ${Math.random()}, ${Math.random()}, ${Math.random() * 360}deg)`
+        snow.style.filter = `blur(${Math.random() * 2}px)`
+        const tar = document.getElementsByClassName("snow-box")[0]
+        tar.appendChild(snow)
+    }
+    var sum = Math.floor(Math.random() * 100) + 50
+    while (sum--) {
+        addSnow()
+    }
+</script>
+{{else if theme == "star"}}
+<canvas id="stars"></canvas>
+<script src="{{_res_path}}html/common/star.js"></script>
+{{/if}}
+
+{{/block}}

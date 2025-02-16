@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" href="#" />
+    <link rel="stylesheet" type="text/css" href="{{_res_path}}html/common/common.css" />
+    {{block 'css'}}
+    {{/block}}
+    <title>phi-plugin</title>
+</head>
+
+<body class="elem-{{element||elem||`hydro`}} {{displayMode || mode || `default`}}-mode  {{bodyClass}}" {{sys.scale}}>
+
+    
+    <div class="background">
+        {{if theme == "star"}}
+        <img src="{{_res_path}}html/otherimg/Star1.png" alt="曲绘-模糊">
+        <img src="{{_res_path}}html/otherimg/Star2.png" alt="曲绘-模糊"
+            style="min-height: 0;width: 100%;height: auto;bottom: 0;filter: none;">
+        {{else}}
+        {{if background}}
+        <img src="{{background}}" alt="曲绘-模糊">
+        {{else}}
+        <img src="{{_res_path}}html/otherimg/phigros.png" alt="曲绘-模糊">
+        {{/if}}
+        {{/if}}
+    </div>
+
+    <!-- <div class="container" id="container"> -->
+    {{block 'main'}}{{/block}}
+    <!-- <div class="copyright">{{@sys.copyright}}</div> -->
+    <!-- </div> -->
+    <!-- 曲目名称自适应name-box的宽度 -->
+
+    <script>
+        function adjustFontSize() {
+            //获取p元素
+            let a = document.getElementsByName('pvis')
+            for (let i = 0; i < a.length; ++i) {
+
+                let songName = a[i]
+
+                if (!songName) continue
+
+
+                /*调整曲目名称字体大小*/
+                let parentElement = songName.parentElement
+                let maxFontSize = 100 //设置最大字体大小
+                songName.style.fontSize = maxFontSize + "px"
+
+                // 如果字体宽度大于父元素宽度，则减小字体大小
+                let fontSize = maxFontSize;
+                songName.style.fontSize = fontSize + "px";
+
+                // 使用倍增算法快速减小字体大小
+                while (songName.scrollWidth > parentElement.offsetWidth || songName.scrollHeight > parentElement.offsetHeight) {
+                    fontSize = Math.floor(fontSize / 2);
+                    songName.style.fontSize = fontSize + "px";
+                }
+
+                // 逐步增加字体大小，找到最合适的大小
+                while (songName.scrollWidth <= parentElement.offsetWidth && songName.scrollHeight <= parentElement.offsetHeight && fontSize < maxFontSize) {
+                    fontSize += 1;
+                    songName.style.fontSize = fontSize + "px";
+                }
+
+                // 回退到合适的字体大小
+                songName.style.fontSize = (fontSize - 1) + "px";
+            }
+
+        }
+        window.onload = adjustFontSize
+        window.onresize = adjustFontSize
+    </script>
+</body>
+
+</html>
