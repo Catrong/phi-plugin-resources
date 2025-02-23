@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="#" />
     <title>phi-plugin B19</title>
-    <link rel="stylesheet" type="text/css" href="./displayB19.css">
+    <link rel="stylesheet" type="text/css" href="/phi-html/resources/html/b19/displayB19.css">
 </head>
 
 <body>
     <div class="background">
-        <img src="https://raw.githubusercontent.com/Catrong/phi-plugin-ill/refs/heads/main/illBlur/996.李化禹.png" alt="曲绘"
+        <img src="/phi-html/ill/illBlur/996.李化禹.png" alt="曲绘"
             id="bkg">
     </div>
     <div class="atitle">
         <div class="logo" id="logo">
-            <img src="../otherimg/Phigros_Icon_3.0.0.png" alt="Phigros_Icon_3.0.0">
+            <img src="/phi-html/resources/html/otherimg/Phigros_Icon_3.0.0.png" alt="Phigros_Icon_3.0.0">
             <p name="pvis">Phigros RankingScore查询</p>
         </div>
         <div class="user" id="user">
@@ -29,6 +29,9 @@
     <script>
         function adjustFontSize() {
             //获取p元素
+            function isBiggerThanParent(songName, parentElement) {
+            return songName.scrollWidth > parentElement.offsetWidth || songName.scrollHeight > parentElement.offsetHeight
+            }
             let a = document.getElementsByName('pvis')
             for (let i = 0; i < a.length; ++i) {
 
@@ -121,7 +124,7 @@
             </div>
             <div class="songinfo">
                 <div class="Rating">
-                    <img src="../otherimg/${song.Rating}.png" alt="${song.Rating}">
+                    <img src="/phi-html/resources/html/otherimg/${song.Rating}.png" alt="${song.Rating}">
                 </div>
                 <div class="chengji">
                     <div class="score">
@@ -193,11 +196,11 @@
                 <p>${data.PlayerId}</p>
             </div>
             <div class="userAva">
-                <img src="../avatar/${data.avatar}.png" alt="avatar">
+                <img src="/phi-html/resources/html/avatar/${data.avatar}.png" alt="avatar">
             </div>
             <div class="clg_rks">
                 <div class="webClg">
-                    <img src="../otherimg/${data.ChallengeMode}.png" alt="Challenge">
+                    <img src="/phi-html/resources/html/otherimg/${data.ChallengeMode}.png" alt="Challenge">
                     <p>${data.ChallengeModeRank}</p>
                 </div>
                 <div class="webRks">
